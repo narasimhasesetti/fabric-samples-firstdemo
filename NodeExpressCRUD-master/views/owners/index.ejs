@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Company List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/owners/create">Create Company </a></h3>
+      <h1>Company List</h1>
+      <% if(owners.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>CompanyName</th>
+             <th> Address</th>
+
+            
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<owners.length;i++) { %>
+            <tr>
+               <td><a href="/owners/show/<%= owners[i]._id%>"><%= owners[i]._id%></a></td>
+
+              <td><%= owners[i].companyname%></td>
+               <td><%= owners[i].address%></a></td>
+
+
+
+
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No ownersfound.</div>
+      <% } %>
+    </div>
+<% include footer.ejs %>
+
+  </body>
+</html>

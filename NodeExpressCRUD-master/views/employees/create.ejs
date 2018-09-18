@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Employee</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/employees">Employee List</a></h3>
+      <h1>Create New Employee</h1>
+      <form action="/employees/save" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td><input type="text" name="name" /></td>
+            </tr>
+            <tr>
+              <td>Address</td>
+            <td><textarea name="address"></textarea></td>
+            </tr>
+
+            <tr>
+             <td>Organization</td>
+              <td>
+              <select name="organization">
+              <option value="organization1">AUDI</option>
+              <option value="organization2">BMW</option>
+              <option value="organization2">MARUTHI</option>
+ 
+             </select>
+	      </td>
+            </tr>
+
+            <tr>
+              <td>Department</td>
+              <td>
+              <select name="department">
+              <option value="department1">department1</option>
+              <option value="department2">department2 </option>
+             </select>
+	      </td>
+            </tr>
+            <tr>
+              <td>Position</td>
+              <td><input type="text" name="position" /></td>
+            </tr>
+            <tr>
+              <td>Salary</td>
+              <td><input type="number" name="salary" /></td>
+            </tr>
+             <tr>
+              <td>Email</td>
+              <td><input type="text" name="email" /></td>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td><input type="password" name="password"  value="abc123" /></td>
+            </tr>
+           
+            <tr>
+              <td colspan="2"><button type="submit">Save</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+<!-- <% include footer.ejs %> -->
+
+
+  </body>
+</html>

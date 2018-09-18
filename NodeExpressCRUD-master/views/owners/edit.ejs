@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Company </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/owners">Company List</a></h3>
+      <h1>Edit Owner </h1>
+      <form action="/owners/update/<%= owner._id%>" method="post">
+        <table>
+          <tbody>
+                    <tr>
+              <td>CompanyName</td>
+              <td><textarea name="companyname"><%= owner.companyname%></textarea></td>
+            </tr>
+<tr>
+              <td>Address</td>
+              <td><input type="text" name="address" value="<%= owner.address %>" /></td>
+            </tr>
+    
+            
+
+            <tr>
+              <td colspan="2"><button type="submit">Update</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+
+  </body>
+</html>

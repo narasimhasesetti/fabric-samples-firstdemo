@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Transaction</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/transactions">Transaction List</a></h3>
+      <h1>Edit Transaction</h1>
+      <form action="/transactions/update/<%= transaction._id%>" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>FromCompany</td>
+              <td><input type="text" name="fromcompany" value="<%= transaction.fromcompany%>" /></td>
+            </tr>
+            <tr>
+              <td>ToCompany</td>
+              <td><input type="text" name="tocompany" value="<%= transaction.tocompany%>" /></td>
+
+            </tr>
+            
+             <tr>
+              <td>Asset</td>
+              <td><input type="text" name="asset" value="<%= transaction.asset%>" /></td>
+            </tr>
+             <tr>
+              <td>AssetType</td>
+              <td><input type="text" name="assettype" value="<%= transaction.assettype%>" /></td>
+            </tr>
+
+            <tr>
+              <td>OrderedQuantity</td>
+              <td><input type="number" name="orderedquantity" value="<%= transaction.orderedquantity%>" /></td>
+            </tr>
+              
+
+            <tr>
+              <td>OrderedDate</td>
+              <td id="demo"></td>
+
+            //<td><input type="date" name="ordereddate" value="<%= transaction.ordereddate%>" /></td>
+
+            </tr>
+             <tr>
+              <td colspan="2"><button type="submit">Update</button></td>
+            </tr>
+
+          </tbody>
+
+        </table>
+      </form>
+    </div>
+
+
+  </body>
+</html>

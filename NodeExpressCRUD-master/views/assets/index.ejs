@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List of assets</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/assets/create">create  Asset</a></h3>
+      <h1>List of assets</h1>
+      <% if(assets.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Id</th>
+             <th> Asset Name </th>
+            <th> Asset Type </th>
+            <th> Asset Vin </th>
+
+
+            <th> Owner </th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<assets.length;i++) { %>
+            <tr>
+               <td><a href="/assets/show/<%= assets[i]._id%>"><%= assets[i]._id%></a></td>
+               <td><%= assets[i].assetname%></td>
+	      <td><%= assets[i].assettype%></td>
+              <td><%= assets[i].vin%></td>
+              <td><%= ownersList[assets[i].owner] %></td>
+
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No asset found.</div>
+      <% } %>
+    </div>
+<!-- <% include footer.ejs %> -->
+
+
+  </body>
+</html>

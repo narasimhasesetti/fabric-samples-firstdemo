@@ -1,0 +1,118 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+/* Float ten columns side by side */
+.column {
+  float: left;
+  width: 5%;
+  padding: 2px 2px 2px 2px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 2, 0.2);
+padding: 6px;
+    
+  text-align: -webkit-center;
+ background-color:#00b7ff;
+
+margin:5px 5px 5px 5px;
+}
+
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width:214px;
+    background-color:#80ddf763;
+    color: #00b7ff;
+     font-size:10px;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+</style>
+
+
+<footer>
+<h1> Block explorer</h1>
+<br>
+<div class="row">
+<% blockChainData.chain.forEach(function(blockdata) { %>
+
+<div class="column ">
+
+
+<div class="tooltip">     <span class="card">
+     <b><%= blockdata.index %>  </b>
+     </span>
+  <span class="tooltiptext"> <p><b>Hash :</b>&nbsp;    <code><%= blockdata.hash.slice(1, 20); %> </code></p>        <p>  <b>PreviousHash:</b>&nbsp;
+     <code><%= blockdata.prevHash.toString().slice(1,20);		%> </code>  </p>
+</span>
+</div>
+
+
+</div>
+  <% }); %>
+</div>
+
+
+
+</footer>
+

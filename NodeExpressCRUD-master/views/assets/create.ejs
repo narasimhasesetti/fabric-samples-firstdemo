@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Asset</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/assets">Asset List</a></h3>
+      <h1>Create New Assets</h1>
+      <form action="/assets/save" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>Asset Name</td>
+              <td><input type="text" name="assetname" /></td>
+            </tr>
+
+
+            <tr>
+              <td>Asset Type</td>
+              <td><textarea name="assettype"></textarea></td>
+            </tr>
+
+
+         <tr>
+              <td>Asset Quantity</td>
+              <td><input type="text" name="assetquantity" value="5" /></td>
+            </tr>
+
+
+            
+             
+            <tr>
+             <td> Owner Company</td>
+               <td><select name="owner">
+         <% for(var i=0; i<owners.length;i++) { %>
+             <option value="<%= owners[i]._id%>"> <%= owners[i].companyname%> </option>
+          <% } %>
+
+         </select> 
+           </td>
+
+            </tr>
+           <tr>
+              <td colspan="2"><button type="submit">Save</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+<!-- <% include footer.ejs %> -->
+
+
+  </body>
+</html>

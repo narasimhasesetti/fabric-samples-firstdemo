@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Transaction</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <div class="container">
+      <h3><a href="/transactions">Transaction List</a></h3>
+      <h1>Create New Transaction</h1>
+      <form action="/transactions/save" method="post">
+        <table>
+          <tbody>
+            
+
+             <tr>
+             <td> From Company</td>
+               <td><select name="fromcompany">
+             <% for(var i=0; i<owners.length;i++) { %>
+             <option value="<%= owners[i]._id%>"> <%= owners[i].companyname%> </option>
+             <% } %>
+
+            </select> 
+            </td>
+
+            </tr>
+
+           
+
+
+           <tr>
+             <td> To Company</td>
+               <td><select name="tocompany">
+         <% for(var i=0; i<owners.length;i++) { %>
+             <option value="<%= owners[i]._id%>"> <%= owners[i].companyname%> </option>
+          <% } %>
+
+         </select> 
+           </td>
+
+            </tr>
+
+            
+
+            
+             <tr>
+             <td> Asset</td>
+               <td><select name="asset">
+
+          <% for(var i=0; i<assets.length;i++) { %>
+             <option value="<%= assets[i]._id%>"> <%= assets[i].assetname%> </option>
+          <% } %>
+
+             </select> 
+           </td>
+
+            
+         
+            </tr>
+
+             <tr>
+              <td>Transaction Type</td>
+              <td> 
+			<select name="transactiontype">
+				<option value="changeowner">Change Owner </option>
+				<option value="splitasset"> Split Asset </option>
+			</select>
+
+	     </td>
+            </tr>
+
+            <tr>
+              <td>Ordered Quantity</td>
+              <td><input type="text" name="orderedquantity" /></td>
+            </tr>
+             
+
+             <tr>
+              <td>Ordered Date</td>
+              <td id="demo"> <input type="text" id="ordereddate" name="ordereddate" value="" readonly=readonly/> </td>
+
+             </tr>
+             
+              <tr>
+              <td colspan="2"><button type="submit">Save</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+<script>
+var today = new Date();
+var dd = today.getDate(); 
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear(); 
+document.getElementById("ordereddate").value = mm+'/'+dd+'/'+yyyy;
+</script>
+<% include footer.ejs %>
+
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Company Detail</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/owners">company List</a></h3>
+      <h1>Company Detail</h1>
+      <table>
+        <tbody>
+          
+         <tr>
+            <td>CompanyName</td>
+            <td>:</td>
+            <td><%= owner.companyname%></td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>:</td>
+            <td><%= owner.address%></td>
+          </tr>
+
+          
+        </tbody>
+      </table>
+      <h3><a href="/owners/edit/<%= owner ._id%>">EDIT</a></h3>
+      <form action="/owners/delete/<%= owner ._id%>" method="post">
+        <button type="submit">DELETE</button>
+      </form>
+    </div>
+
+
+
+
+<% include footer.ejs %>
+
+</body>
+
+ 
+</html>

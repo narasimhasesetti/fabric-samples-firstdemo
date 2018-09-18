@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Asset Detail</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/assets">Asset List</a></h3>
+      <h1>Asset Detail</h1>
+      <table>
+        <tbody>
+          <tr>
+            <td>Asset Name</td>
+            <td>:</td>
+            <td><%= asset.assetname %></td>
+          </tr>
+          <tr>
+            <td>Asset Type </td>
+            <td>:</td>
+            <td><%= asset.assettype %></td>
+          </tr>
+
+<tr>
+            <td>Asset Quantity </td>
+            <td>:</td>
+            <td><%= asset.assetquantity%></td>
+          </tr>
+          
+          <tr>
+            <td>Owner</td>
+            <td>:</td>
+            <td><%= asset.owner %></td>
+          </tr>
+         
+        </tbody>
+      </table>
+      <h3><a href="/assets/edit/<%= asset._id%>">EDIT</a></h3>
+      <form action="/assets/delete/<%= asset._id%>" method="post">
+        <button type="submit">DELETE</button>
+      </form>
+    </div>
+
+<!-- <% include footer.ejs %> -->
+
+
+  </body>
+</html>

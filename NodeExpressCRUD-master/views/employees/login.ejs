@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login form</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h1> Login Form</h1>
+
+      <form action="/employees/logincheck" method="post">
+        <table>
+          <tbody>
+             <tr>
+              <td>Email </td>
+              <td><input type="text" name="email" /></td>
+            </tr>
+              <tr>
+              <td>Password </td>
+              <td><input type="password" name="password" /></td>
+            </tr>
+   
+             <tr>
+              <td colspan="2"><button type="submit">Login</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

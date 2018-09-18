@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Asset</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/assets">Asset List</a></h3>
+      <h1>Edit Asset</h1>
+      <form action="/assets/update/<%= asset._id%>" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>Asset Name</td>
+              <td><input type="text" name="assetname" value="<%= asset.assetname %>" /></td>
+            </tr>
+            <tr>
+              <td>Asset Type</td>
+              <td><textarea name="assettype"><%= asset.assettype %></textarea></td>
+            </tr>
+            <tr>
+              <td>Owner</td>
+              <td><input type="text" name="owner" value="<%= asset.owner %>" /></td>
+            </tr>
+            
+            <tr>
+              <td colspan="2"><button type="submit">Update</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

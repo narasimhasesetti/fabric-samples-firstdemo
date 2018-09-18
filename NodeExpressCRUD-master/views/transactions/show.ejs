@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Transaction Detail</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/transactions">Transaction List</a></h3>
+      <h1>Transaction Detail</h1>
+      <table>
+        <tbody>
+          <tr>
+            <td>From Company</td>
+            <td>:</td>
+	    <td> <%= ownersList[transaction.fromcompany] %>   </td>
+
+          </tr>
+          <tr>
+            <td>To Company</td>
+            <td>:</td>
+	    <td> <%= ownersList[transaction.tocompany] %>   </td>
+          </tr>
+          
+          <tr>
+            <td>Asset</td>
+            <td>:</td>
+            <td><%= transaction.asset%></td>
+          </tr>
+          <tr>
+            <td>Transaction Type</td>
+            <td>:</td>
+            <td><%= transaction.transactiontype%></td>
+          </tr>
+          <tr>
+
+            <td>Ordered Quantity</td>
+            <td>:</td>
+            <td><%= transaction .orderedquantity%></td>
+          </tr>
+          
+           <tr>
+            <td>Ordered Date</td>
+            <td>:</td>
+         <td id="demo"></td>
+           </tr>
+           </tbody>
+      </table>
+      <h3><a href="/transactions/edit/<%= transaction._id%>">EDIT</a></h3>
+      <form action="/transactions/delete/<%= transaction._id%>" method="post">
+        <button type="submit">DELETE</button>
+      </form>
+    </div>
+   <script>
+  var d = new Date();
+  document.getElementById("demo").innerHTML = d;
+  </script>
+<% include footer.ejs %>
+
+
+
+  </body>
+
+</html>

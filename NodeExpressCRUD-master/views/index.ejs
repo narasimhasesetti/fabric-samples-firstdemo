@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+   <h1>Dashboard Home Page</h1>
+    <p>Welcome to Demo</p>
+
+Prerequisites:
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<div class="container">
+
+    <div class="form-group">
+       <input type="button" class="btn btn-default" id="createuser" value="create user" name="id"/>
+    </div>
+
+    <div class="form-group">
+       <input type="button" class="btn btn-default" id="createchannel" value="create channel"/>
+    </div>
+
+   <div class="form-group">
+       <input type="button" class="btn btn-default" id="joinPeer" value="Join Peers in Channel" />
+    </div>
+
+  <div class="form-group">
+       <input type="button" class="btn btn-default" id="installChainCode" value="Install Chain Code" />
+   </div>
+
+  <div class="form-group">
+       <input type="button" class="btn btn-default" id="instantiateChainCode" value="Instantiate Chain Code" />
+   </div>
+</div>
+ 
+<h2> General application </h2>
+
+    <h4><a href="/employees">Employee</a></h4>
+    <h4><a href="/owners">Owner</a></h4>
+    <h4><a href="/assets">Asset</a></h4>
+    <h4><a href="/transactions">Transactions</a></h4>
+
+
+  </body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+ 
+var Token = "";
+var TokenTwo = "";
+
+var surl="http://172.16.40.170:4000"; 
+
+   
+   $("#createuser").click(function(){
+          createuser();
+   });
+
+ $("#createchannel").click(function(){
+        createChannel();
+ });
+
+ $("#joinPeer").click(function(){
+        joinPeerToChannel();
+ });
+
+ $("#installChainCode").click(function(){
+        installChainCode();
+ });
+
+$("#instantiateChainCode").click(function(){
+        instantiateChainCode();
+ });
+
+
+$("#createFirstOwner").click(function(){
+        createFirstOwner();
+ });
+
+
+$("#createSecondOwner").click(function(){
+        createSecondOwner();
+ });
+
+ $("#createAsset").click(function(){
+        createAsset();
+ });
+
+
+ $("#changeOwnerForAsset").click(function(){
+        changeOwnerForAsset();
+ });
+
+
+
+
+
+
+
+
+
+  
+
+function createuser(){
+ 
+	var rdata =  {
+		username:'rajaTheGreate',
+		orgName:'Org1'
+  	};
+
+ $.ajax({
+  	url: surl+'/users',
+  	type:"POST",
+  	contentType:'application/json',
+ 	dataType:"json",
+ 	data:JSON.stringify(rdata),
+ 	success: function(data){
+	console.log("success message"+JSON.stringify(data));
+  	Token = data.token;
+   	createSeconduser(); //alert('user Create Successfully');   
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+        alert('error');        
+	console.log('error message');
+   }
+			
+});
+}
+
+function createSeconduser(){
+ 
+	var rdata =  {
+		username:'rajaTheGreate',
+		orgName:'Org2'
+  	};
+
+ $.ajax({
+  	url: surl+'/users',
+  	type:"POST",
+  	contentType:'application/json',
+ 	dataType:"json",
+ 	data:JSON.stringify(rdata),
+ 	success: function(data){
+	console.log("success message"+JSON.stringify(data));
+  	TokenTwo = data.token;
+   	alert('user Create Successfully');   
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+        alert('error');        
+	console.log('error message');
+   }
+			
+});
+}
+  
+ 
+function  createChannel(){
+var rdata = {
+	"channelName":"mychannel",
+	"channelConfigPath":"../artifacts/channel/mychannel.tx"
+  };
+
+ $.ajax({
+  url: surl+'/channels',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	alert( Token );console.log(Token);
+  		xhr.setRequestHeader('Authorization','Bearer ' + Token);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+	console.log("success message create channel");
+ 	alert('Channel Created');	
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message');
+   }
+			
+});
+
+}
+ 
+ 
+function  joinPeerToChannel(){
+var rdata = {
+	"peers": ["peer0.org1.example.com","peer1.org1.example.com"]
+  };
+
+ $.ajax({
+  url: surl+'/channels/mychannel/peers',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	//alert( Token );console.log(Token);
+	xhr.setRequestHeader('Authorization','Bearer ' + Token);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+	joinSecondOrgPeerToChannel();
+        console.log("success message join peers");
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message join peers');
+   }
+			
+});
+};
+
+
+function  joinSecondOrgPeerToChannel(){
+var rdata = {
+	"peers": ["peer0.org2.example.com","peer1.org2.example.com"]
+  };
+
+ $.ajax({
+  url: surl+'/channels/mychannel/peers',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	//alert( TokenTwo );console.log(TokenTwo );
+	xhr.setRequestHeader('Authorization','Bearer ' + TokenTwo);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+        alert('Join Peers to Channel');
+	console.log("success message join peers");
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message join peers');
+   }
+			
+});
+};
+
+ 
+
+ 
+function  installChainCode(){
+var rdata = {
+	"peers": ["peer0.org1.example.com","peer1.org1.example.com"],
+	"chaincodeName":"mycc",
+	"chaincodePath":"github.com/example_cc/go",
+	"chaincodeType": "golang",
+	"chaincodeVersion":"v0"
+  };
+
+ $.ajax({
+  url: surl+'/chaincodes',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	//alert( Token );console.log(Token);
+	xhr.setRequestHeader('Authorization','Bearer ' + Token);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+        //alert('Your Chain code deployed into Peers');
+	//console.log("Your Chain code deployed into Peers");
+	installChainCodeInOrgTwo();
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message Your Chain code deployed into Peers');
+   }
+			
+});
+};
+
+
+ 
+function  installChainCodeInOrgTwo(){
+var rdata = {
+	"peers": ["peer0.org2.example.com","peer1.org2.example.com"],
+	"chaincodeName":"mycc",
+	"chaincodePath":"github.com/example_cc/go",
+	"chaincodeType": "golang",
+	"chaincodeVersion":"v0"
+  };
+
+ $.ajax({
+  url: surl+'/chaincodes',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	//alert( Token );console.log(TokenTwo);
+	xhr.setRequestHeader('Authorization','Bearer ' + TokenTwo);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+        alert('Your Chain code deployed into Peers');
+	console.log("Your Chain code deployed into Peers");
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message Your Chain code deployed into Peers');
+   }
+			
+});
+};
+
+
+ 
+function  instantiateChainCode(){
+var rdata = {
+	"peers": ["peer0.org1.example.com","peer1.org1.example.com"],
+	"chaincodeName":"mycc",
+	"chaincodeVersion":"v0",
+	"chaincodeType": "golang",
+	"args":["a","100","b","200"]
+  };
+
+ $.ajax({
+  url: surl+'/channels/mychannel/chaincodes',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	//alert( Token );console.log(Token);
+	xhr.setRequestHeader('Authorization','Bearer ' + Token);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+        alert('Your Chain code has been  instantiated');
+	console.log("Your Chain code has been  instantiated");
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message code has been  instantiated');
+   }
+			
+});
+};
+ 
+ 
+function  createAsset(){
+var rdata = {
+        "peers": ["peer0.org1.example.com","peer1.org1.example.com"],
+ "fcn":"init_marble",
+ "args":["m88888888", "Green", "35", "o9999999999999", "united marbles"]
+ };
+
+ $.ajax({
+  url: surl+'/channels/mychannel/chaincodes/mycc',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+ alert( Token );console.log(Token);
+ xhr.setRequestHeader('Authorization','Bearer ' + Token);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+        alert('Your Asset  created successfully');
+ console.log("Your Asset created successfully");
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message on Asset creation');
+   }
+   
+});
+};
+
+
+ 
+function  createFirstOwner(){
+var rdata = {
+	"peers": ["peer0.org1.example.com","peer1.org1.example.com"],
+	"fcn":"init_owner",
+	"args":["o9999999999999","SivaDurga","audi"]
+  };
+
+ $.ajax({
+  url: surl+'/channels/mychannel/chaincodes/mycc',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	alert( Token );console.log(Token);
+	xhr.setRequestHeader('Authorization','Bearer ' + Token);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+        alert('Your Owner created successfully');
+	console.log("Your Owner created successfully");
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message Your Owner creation');
+   }
+			
+});
+};
+ 
+
+
+function  createSecondOwner(){
+var rdata = {
+	"peers": ["peer0.org1.example.com","peer1.org1.example.com"],
+	"fcn":"init_owner",
+	"args":["o98888888888","Bhaskar","bmw"]
+  };
+
+ $.ajax({
+  url: surl+'/channels/mychannel/chaincodes/mycc',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	alert( Token );console.log(Token);
+	xhr.setRequestHeader('Authorization','Bearer ' + Token);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+        alert('Your Owner created successfully');
+	console.log("Your Owner created successfully");
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message Your Owner creation');
+   }
+			
+});
+};
+
+
+ 
+
+function  changeOwnerForAsset(){
+var rdata = {
+        "peers": ["peer0.org1.example.com","peer1.org1.example.com"],
+	"fcn":"set_owner",
+	"args":["m88888888","o98888888888","united marbles"]
+ };
+
+
+ $.ajax({
+  url: surl+'/channels/mychannel/chaincodes/mycc',
+  type:"POST",
+  data:JSON.stringify(rdata),
+  beforeSend: function (xhr) {
+	alert( Token );console.log(Token);
+	xhr.setRequestHeader('Authorization','Bearer ' + Token);
+  },
+  contentType:"application/json",
+  dataType:"json",
+  success: function(){
+        alert('Your Asset  Owner changed successfully');
+	console.log("Your Asset owner changed successfully");
+  },
+   error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('error message on change Owner for your  Asset');
+   }
+			
+});
+};
+});
+
+</script>

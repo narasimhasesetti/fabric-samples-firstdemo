@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Transaction List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/transactions/create">Create Transaction</a></h3>
+      <h1>Transactions List</h1>
+      <% if(transactions.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Tr. ID</th>
+            <th>From company</th>
+            <th>To company</th>
+            <th>Transaction type</th>
+            <th>Ordered quantity</th>
+           <th>Ordered date</th>
+           
+           </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<transactions.length;i++) { %>
+            <tr>
+               <td><a href="/transactions/show/<%= transactions[i]._id%>"><%= transactions[i].id%></a></td>
+              <td> <%= ownersList[transactions[i].fromcompany] %>   </td>
+              <td> <%= ownersList[transactions[i].tocompany] %>     </td>
+              <td><%= transactions[i].transactiontype%>
+              <td><%= transactions[i].orderedquantity%></td>
+              <td><%= transactions[i].ordereddate%></td>
+
+
+
+
+           </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No transactions found.</div>
+      <% } %>
+    </div>
+<% include footer.ejs %>
+
+  </body>
+</html>

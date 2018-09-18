@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/employees/create">Create Employee</a></h3>
+      <h1>Employee List</h1>
+      <% if(employees.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Organization</th>
+
+
+
+            <th>Position</th>
+            <th>Salary</th>
+           <th>Email</th>
+           <th>Password</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<employees.length;i++) { %>
+            <tr>
+              <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].name%></a></td>
+              <td><%= employees[i].address%></td>
+
+              <td><%= employees[i].department%></td>
+              <td><%= employees[i].organization%></td>
+              <td><%= employees[i].position%></td>
+
+
+
+              <td><%= employees[i].salary%></td>
+              <td><%= employees[i].email%></td>
+              <td><%= employees[i].password%></td>
+
+
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No employees found.</div>
+      <% } %>
+    </div>
+<!-- <% include footer.ejs %> -->
+
+  </body>
+</html>
